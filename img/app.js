@@ -36,43 +36,41 @@ function randomIndex() {
   return Math.floor(Math.random() * productArray.length);
 }
 
-let indexArray = [];
-
 function renderImg() {
   //TODO: 2 unique images and populate the images
+  let indexArray = [];
 
   //**Validation to make sure the numbers are unique**
-  while (indexArray.length < 6) {
+  while (productArray.length < 6) {
     let randoNum = randomIndex();
     if (!indexArray.includes(randoNum)) {
       indexArray.push(randoNum);
     }
   }
-  let imgTwoIndex = indexArray.shift();
-  let imgOneIndex = indexArray.shift();
-  let imgThreeIndex = indexArray.shift();
 
-
-
-
-
-  imgOne.src = productArray[imgOneIndex].img;
-  imgTwo.src = productArray[imgTwoIndex].img;
-  imgThree.src = productArray[imgThreeIndex].img;
-  imgOne.title = productArray[imgOneIndex].name;
-  imgTwo.title = productArray[imgTwoIndex].name;
-  imgThree.title = productArray[imgThreeIndex].name;
-  imgOne.alt = `this is an image of ${productArray[imgOneIndex].name}`;
-  imgTwo.alt = `this is an image of ${productArray[imgTwoIndex].name}`;
-  imgThree.alt = `this is an image of ${productArray[imgThreeIndex].name}`;
-
-  //TODO: increase the number of views on the images that have been rendered
-
-  productArray[imgOneIndex].views++;
-  productArray[imgTwoIndex].views++;
-  productArray[imgThreeIndex].views++;
-
+  imgTwoIndex = randomIndex();
+  imgOneIndex = randomIndex();
+  imgThreeIndex = randomIndex();
 }
+
+
+
+imgOne.src = productArray[imgOneIndex].img;
+imgTwo.src = productArray[imgTwoIndex].img;
+imgThree.src = productArray[imgThreeIndex].img;
+imgOne.title = productArray[imgOneIndex].name;
+imgTwo.title = productArray[imgTwoIndex].name;
+imgThree.title = productArray[imgThreeIndex].name;
+imgOne.alt = `this is an image of ${productArray[imgOneIndex].name}`;
+imgTwo.alt = `this is an image of ${productArray[imgTwoIndex].name}`;
+imgThree.alt = `this is an image of ${productArray[imgThreeIndex].name}`;
+
+//TODO: increase the number of views on the images that have been rendered
+
+productArray[imgOneIndex].views++;
+productArray[imgTwoIndex].views++;
+productArray[imgThreeIndex].views++;
+
 
 function renderChart() {
   let productNames = [];
@@ -82,7 +80,6 @@ function renderChart() {
   for (let i = 0; i < productArray.length; i++) {
     productNames.push(productArray[i].name);
     productVotes.push(productArray[i].votes);
-    productViews.push(productArray[i].views);
   }
 
   let chartObj = {
@@ -93,7 +90,6 @@ function renderChart() {
         label: '# of Votes',
         data: productVotes,
         borderWidth: 1
-        
       },
       {
         label: '# of Views',
@@ -183,7 +179,6 @@ productArray.push(bagProduct, bananaProduct, bathroomProduct, bootsProduct, brea
 
 
 renderImg();
-randomIndex();
 
 
 imgContainer.addEventListener('click', handleClick);
