@@ -193,3 +193,4 @@ resultsBtn.addEventListener('click', handleShowResults);
 //console.log(productArray);
 
 //test 1
+//test 2
