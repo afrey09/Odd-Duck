@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 //****GLOBALS******
 
@@ -13,7 +13,7 @@ let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
 
 let resultsBtn = document.getElementById('show-results-btn');
-let resultslist = document.getElementById('results-container');
+//let resultslist = document.getElementById('results-container');
 
 //****CANVAS ELEMENT FOR CHART DEMO ***
 
@@ -93,7 +93,7 @@ function renderChart() {
         label: '# of Votes',
         data: productVotes,
         borderWidth: 1
-        
+
       },
       {
         label: '# of Views',
@@ -148,7 +148,21 @@ function handleClick(event) {
   if (votingRounds === 0) {
     imgContainer.removeEventListener('click', handleClick);
   }
+  let stringifiedProducts = JSON.stringify(productArray);
+
+  console.log('Stringified Products', stringifiedProducts);
+
+  localStorage.setItem('myProducts', stringifiedProducts);
 }
+
+//***LOCAL STORAGE STARTS HER***
+
+// ! STEP 1 - STRINGIFY DATA FOR LOCAL STORAGE
+
+
+
+//! STEP 2 - SET TO LOCAL STORAGE OBJECT
+
 
 function handleShowResults() {
   //TODO: Display results once there are no more votes
@@ -159,28 +173,46 @@ function handleShowResults() {
 
 //*****EXECUTABLE CODE**** 
 
-let sweepProduct = new Product('sweep', 'png');
-let bagProduct = new Product('bag');
-let bananaProduct = new Product('banana');
-let bathroomProduct = new Product('bathroom');
-let bootsProduct = new Product('boots');
-let breakfastProduct = new Product('breakfast');
-let bubbleGumProduct = new Product('bubblegum');
-let chairProduct = new Product('chair');
-let cthulhuProduct = new Product('cthulhu');
-let dogDuckProduct = new Product('dog-duck');
-let dragonProduct = new Product('dragon');
-let penProduct = new Product('pen');
-let petSweepProduct = new Product('pet-sweep');
-let scissorsProduct = new Product('scissors');
-let sharkProduct = new Product('shark');
-let tauntaunProduct = new Product('tauntaun');
-let unicornProduct = new Product('unicorn');
-let waterCanProduct = new Product('water-can');
-let wineGlassProduct = new Product('wine-glass');
+//! STEP 3 - PULL DATA FROM LOCAL STORAGE
 
-productArray.push(bagProduct, bananaProduct, bathroomProduct, bootsProduct, breakfastProduct, bubbleGumProduct, chairProduct, cthulhuProduct, dogDuckProduct, dragonProduct, penProduct, petSweepProduct, scissorsProduct, sharkProduct, sweepProduct, tauntaunProduct, unicornProduct, waterCanProduct, wineGlassProduct);
+let retrievedProducts = localStorage.getItem('myProducts');
 
+console.log('retrieved products>>>', retrievedProducts);
+
+//! STEP 4 - PARSE OUR LOCAL STORAGE DATA
+
+let parsedProducts = JSON.parse(retrievedProducts);
+
+console.log('parsed products>>>', parsedProducts);
+
+if (retrievedProducts) {
+  productArray = parsedProducts;
+} else {
+
+
+
+  let sweepProduct = new Product('sweep', 'png');
+  let bagProduct = new Product('bag');
+  let bananaProduct = new Product('banana');
+  let bathroomProduct = new Product('bathroom');
+  let bootsProduct = new Product('boots');
+  let breakfastProduct = new Product('breakfast');
+  let bubbleGumProduct = new Product('bubblegum');
+  let chairProduct = new Product('chair');
+  let cthulhuProduct = new Product('cthulhu');
+  let dogDuckProduct = new Product('dog-duck');
+  let dragonProduct = new Product('dragon');
+  let penProduct = new Product('pen');
+  let petSweepProduct = new Product('pet-sweep');
+  let scissorsProduct = new Product('scissors');
+  let sharkProduct = new Product('shark');
+  let tauntaunProduct = new Product('tauntaun');
+  let unicornProduct = new Product('unicorn');
+  let waterCanProduct = new Product('water-can');
+  let wineGlassProduct = new Product('wine-glass');
+
+  productArray.push(bagProduct, bananaProduct, bathroomProduct, bootsProduct, breakfastProduct, bubbleGumProduct, chairProduct, cthulhuProduct, dogDuckProduct, dragonProduct, penProduct, petSweepProduct, scissorsProduct, sharkProduct, sweepProduct, tauntaunProduct, unicornProduct, waterCanProduct, wineGlassProduct);
+}
 
 renderImg();
 randomIndex();
@@ -191,6 +223,3 @@ resultsBtn.addEventListener('click', handleShowResults);
 
 
 //console.log(productArray);
-
-//test 1
-//test 2
